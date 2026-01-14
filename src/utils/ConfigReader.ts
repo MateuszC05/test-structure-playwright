@@ -14,7 +14,7 @@ export class ConfigReader {
 
     public static readConfig(): AppConfig {
         if (!fs.existsSync(this.configPath)) {
-            throw new Error(`Configuration file not found at ${this.configPath}`);
+            throw new Error(`Plik konfiguracyjny nie został znaleziony w ścieżce: ${this.configPath}`);
         }
 
         const xmlData = fs.readFileSync(this.configPath, 'utf-8');
@@ -27,7 +27,7 @@ export class ConfigReader {
         const appSettings = jsonObj.configuration.appSettings.add;
         const configMap: { [key: string]: string } = {};
 
-        // Handle both single entry (object) and multiple entries (array)
+        // Obsługa zarówno pojedynczego wpisu (obiekt), jak i wielu wpisów (tablica)
         if (Array.isArray(appSettings)) {
             appSettings.forEach((setting: any) => {
                 configMap[setting['key']] = setting['value'];

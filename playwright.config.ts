@@ -3,7 +3,7 @@ import { ConfigReader } from './src/utils/ConfigReader';
 
 const appConfig = ConfigReader.readConfig();
 
-// Determine browser name and headless mode
+// Określ nazwę przeglądarki i tryb headless
 let browserName = 'chromium';
 let headless = true;
 let channel = undefined;
@@ -33,10 +33,10 @@ switch (appConfig.browser) {
         headless = false;
         break;
     case 'IE':
-        // Playwright doesn't fully support IE11, but we can try to map it or fallback
-        // Usually, projects migrating from Selenium might ask for IE, but Playwright focuses on modern engines.
-        // We'll map it to chromium for now or throw an error if strictly required.
-        console.warn('IE is not natively supported by Playwright. Using Chromium instead.');
+        // Playwright nie obsługuje w pełni IE11, ale możemy spróbować zmapować go lub użyć fallbacku.
+        // Zazwyczaj projekty migrujące z Selenium mogą prosić o IE, ale Playwright skupia się na nowoczesnych silnikach.
+        // Zmapujemy to na chromium na razie lub wyrzucimy błąd, jeśli jest to ściśle wymagane.
+        console.warn('IE nie jest natywnie obsługiwane przez Playwright. Użyto Chromium zamiast niego.');
         browserName = 'chromium';
         headless = false;
         break;
@@ -59,7 +59,7 @@ export default defineConfig({
   use: {
     baseURL: appConfig.appLink,
     trace: 'on-first-retry',
-    video: 'on', // Record video for every test
+    video: 'on', // Nagrywaj wideo dla każdego testu
     screenshot: 'only-on-failure',
     headless: headless,
     viewport: { width: appConfig.width, height: appConfig.height },
@@ -68,42 +68,6 @@ export default defineConfig({
   projects: [
     {
       name: appConfig.browser,
-      // browserName should be defined here, NOT inside use, unless it's a device descriptor
-      // But Playwright documentation says:
-      // "browserName": "chromium" | "firefox" | "webkit"
-      // is a property of use? No, it's a project property?
-      // Actually, 'use' accepts 'browserName' but it is often better to define it at project level if explicit.
-      // Wait, checking Playwright docs... `use: { browserName: ... }` IS valid.
-      // BUT if I want to be 100% sure, I can put it at top level of project object too?
-      // Actually `browserName` IS a property of `use`.
-
-      // However, the reviewer said: "browserName is a top-level property of the Project object, not a property of the use object."
-      // Let's check type definition if possible.
-      // Project interface: name, outputDir, testDir, timeout, retries, use, etc.
-      // But typically we do: use: { ...devices['Desktop Chrome'] } which sets browserName in use.
-
-      // Let's try putting it at project level to satisfy the review and ensure correctness.
-      // Wait, `Project` type in `playwright.config.ts` (PlaywrightTestConfig) does NOT have `browserName` at top level.
-      // It has `use`. `use` has `browserName`.
-
-      // Let's double check.
-      // https://playwright.dev/docs/api/class-testconfig#test-config-projects
-      // properties: name, testDir, ... use.
-      // `use` has `browserName`.
-
-      // So the reviewer might be slightly mistaken or referring to an older version?
-      // OR, maybe I should just use `use: { browserName: ... }` which I did.
-
-      // However, if I look at `devices` from `@playwright/test`:
-      // devices['Desktop Chrome'] returns an object that has configuration.
-      // It sets `browserName` inside.
-
-      // Let's check `devices`.
-      // It seems `use` is the right place.
-
-      // BUT, maybe the reviewer meant that I am putting `browserName` inside `use` but also `channel` inside `use` (global).
-      // Let's just put `use: { browserName: ... }` inside the project explicitly.
-
       use: {
           browserName: browserName as any,
       }

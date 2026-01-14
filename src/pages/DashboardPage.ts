@@ -2,7 +2,7 @@ import { BasePage } from './BasePage';
 import { Page } from '@playwright/test';
 
 export class DashboardPage extends BasePage {
-    // Defines XPaths used only within this class/view
+    // Definiuje Xpathy używane tylko w obrębie tej klasy/widoku
     private readonly selectors = {
         header: 'xpath=//h1[contains(text(), "Dashboard")]',
         timeTrackingWidget: 'xpath=//div[@id="time-tracking-widget"]'

@@ -2,7 +2,7 @@ import { BasePage } from './BasePage';
 import { Page, Locator } from '@playwright/test';
 
 export class LoginPage extends BasePage {
-    // Defines XPaths used only within this class/view
+    // Definiuje Xpathy używane tylko w obrębie tej klasy/widoku
     private readonly selectors = {
         usernameInput: 'xpath=//input[@id="username"]',
         passwordInput: 'xpath=//input[@id="password"]',

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { LoginData } from '../data/LoginData';
 
-test.describe('Login Tests', () => {
+test.describe('Testy Logowania', () => {
     let loginPage: LoginPage;
 
     test.beforeEach(async ({ page }) => {
@@ -10,16 +10,16 @@ test.describe('Login Tests', () => {
         await loginPage.navigate();
     });
 
-    test('Successful Login', async ({ page }) => {
-        // Since we don't have real credentials or a real app instance set up in this environment,
-        // this is a template test.
+    test('Pomyślne Logowanie', async ({ page }) => {
+        // Ponieważ nie mamy prawdziwych danych uwierzytelniających ani prawdziwej instancji aplikacji skonfigurowanej w tym środowisku,
+        // jest to test szablonowy.
         await loginPage.login(LoginData.VALID_USERNAME, LoginData.VALID_PASSWORD);
 
-        // Assertions would go here, e.g.:
+        // Asercje powinny znaleźć się tutaj, np.:
         // await expect(page).toHaveURL(/.*dashboard/);
     });
 
-    test('Failed Login', async ({ page }) => {
+    test('Nieudane Logowanie', async ({ page }) => {
         await loginPage.login(LoginData.INVALID_USERNAME, LoginData.INVALID_PASSWORD);
 
         // await expect(loginPage.getErrorMessage()).resolves.toContain('Invalid credentials');
