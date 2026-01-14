@@ -11,8 +11,11 @@
 		<add key="BrowserSizeHeight" value="1080" />
 
 
-		<!--Wprowadź pełny adres URL. Pozostaw puste, aby utworzyć i skonfigurować nowego klienta-->
-		<add key="appLink" value="https://marketplace.atlassian.com/apps/1225059/apptime-free-time-tracking-timesheets-planning-teams" />
+		<!--Wprowadź pełny adres URL dla Data Center (DC)-->
+		<add key="appLinkDC" value="" />
+
+		<!--Wprowadź pełny adres URL dla Cloud. System wybierze ten link, który jest uzupełniony.-->
+		<add key="appLinkCLOUD" value="https://marketplace.atlassian.com/apps/1225059/apptime-free-time-tracking-timesheets-planning-teams" />
 
 	</appSettings>
 

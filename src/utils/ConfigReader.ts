@@ -36,11 +36,21 @@ export class ConfigReader {
              configMap[appSettings['key']] = appSettings['value'];
         }
 
+        // Logika wyboru linku: jeśli appLinkDC jest uzupełniony, użyj go.
+        // W przeciwnym razie użyj appLinkCLOUD.
+        const link = configMap['appLinkDC'] && configMap['appLinkDC'].trim() !== ''
+            ? configMap['appLinkDC']
+            : configMap['appLinkCLOUD'];
+
+        if (!link) {
+            console.warn("Ostrzeżenie: Nie zdefiniowano żadnego linku aplikacji (appLinkDC ani appLinkCLOUD).");
+        }
+
         return {
             browser: configMap['Browser'] as any,
             width: parseInt(configMap['BrowserSizeWidth']),
             height: parseInt(configMap['BrowserSizeHeight']),
-            appLink: configMap['appLink']
+            appLink: link || ''
         };
     }
 }
