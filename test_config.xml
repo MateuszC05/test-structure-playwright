@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+	<appSettings>
+
+		<!--Choose one of the following browser's value: FIREFOX, CHROME, CHROME_HEADLESS, IE, EDGE, FIREFOX_HEADLESS-->
+		<add key="Browser" value="CHROME_HEADLESS" />
+
+		<add key="BrowserSizeWidth" value="1920" />
+
+		<add key="BrowserSizeHeight" value="1080" />
+
+
+		<!--Enter full tenant URL (Intranet). Leave empty to create and set up a new tenant-->
+		<add key="appLink" value="https://marketplace.atlassian.com/apps/1225059/apptime-free-time-tracking-timesheets-planning-teams" />
+
+	</appSettings>
+
+</configuration>
